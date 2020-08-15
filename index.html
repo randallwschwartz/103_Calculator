@@ -1,0 +1,183 @@
+<!-- Demo Layout for Bootstrap (with cards) -->
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>Electricity Calculator</title>
+
+  <!-- Added link to the jQuery Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+  <!-- We need to bring in the bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Neutraledge.com</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse justify-content-end navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+         </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <br>
+                <br>
+                <h1>Electricity Calculator</h1>
+            </div>
+
+            <div class="col-sm-3">
+			</div>
+			<br>
+
+        </div>
+
+        <div class="row">
+			<div class="jumbotron">
+
+				<div class="row"> Power Consumption (watts or kilowatts):
+					<div class="input-group">
+						<input type="text" class="form-control" id="first-number" aria-label="Text input with dropdown button">
+						<div class="input-group-append">
+							<select class="custom-select" id="inputGroupSelect01">
+								<option selected value="1">watts (W)</option>
+								<option value="2">kilowatts (kW)</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<br>
+
+				<div class="row"> Usage Per Day (hours):
+					<div class="input-group">
+						<input type="text" class="form-control" id="second-number" aria-label="Text input">
+					</div>
+				</div>
+				<br>
+
+				<div class="row"> Cost of 1 kilowatt-hour (cents):
+					<div class="input-group">
+						<input type="text" class="form-control" id="third-number" aria-label="Text input">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<button type="button" class="btn btn-primary calculate">Calculate</button>
+			<button type="button" class="btn btn-success clear">Clear</button>
+		</div>
+
+		<div class="row">
+			<div class="jumbotron">
+
+				<ul class="list-group list-group-horizontal">
+					<li class="list-group-item">Cost per day</li>
+					<li class="list-group-item" id="result"></li>
+				</ul>
+				<br>
+
+				<ul class="list-group list-group-horizontal">
+					<li class="list-group-item">Cost per month</li>
+					<li class="list-group-item" id="result2"></li>
+				</ul>
+				<br>
+
+				<ul class="list-group list-group-horizontal">
+					<li class="list-group-item">Cost per year</li>
+					<li class="list-group-item" id="result3"></li>
+				</ul>
+
+				
+			</div>
+			<br>
+        </div>
+            
+	</div>
+	
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+
+			// Make our variables global to the runtime of our application
+			var firstPower = 0;
+			var secondHours = 0;
+			var thirdKwhrCost = 0;
+			var result = 0;
+			var result2 = 0;
+			var result3 = 0;
+			var isCalculated = false;
+
+			// Use a function to initialize our calculator.
+			// This way when the user hits clear, we can guarantee a reset of the app.
+			function initializeCalculator() {
+				firstPower = 0;
+				secondHours = 0;
+				thirdKwhrCost = 0;
+				isCalculated = false;
+
+				$("#first-number, #second-number, #third-number, #result, #result2, #result3").empty();
+				$("#first-number, #second-number, #third-number").val("0");
+
+			}
+
+			$(".calculate").on("click", function() {
+
+				// If we already clicked equal, don't do the calculation again
+				if (isCalculated) {
+					return false;
+				}
+
+				// Set isCalculated to true so that we don't get in a weird UI state by clicking buttons again
+				isCalculated = true;
+
+				firstPower = $("#first-number").val();
+				secondHours = $("#second-number").val();
+				thirdKwhrCost = $("#third-number").val();
+
+				// Run the calculation and set the HTML of the result of that operation
+				result = (firstPower * secondHours) * thirdKwhrCost / 100;
+				result2 = result * 365.25 / 12;
+				result3 = result * 365.25;
+				
+				$("#result").text(result);
+				$("#result2").text(result2);
+				$("#result3").text(result3);
+
+			});
+
+			$(".clear").on("click", function() {
+
+				// Call initializeCalculater so we can reset the state of our app
+				initializeCalculator();
+
+			});
+
+			// Call initializeCalculater so we can set the state of our app
+			initializeCalculator();
+		});
+
+	</script>
+
+    
+</body>
+
+</html>
