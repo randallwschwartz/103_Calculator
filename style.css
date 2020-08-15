@@ -1,0 +1,13 @@
+body {
+	/* Typography */
+	font-size: 18px;
+	line-height: 27px;
+  
+	/* Visual */
+	background-color: #ccc;
+  }
+
+.btn {
+	margin-left: 10px;
+	margin-right: 10px;
+}

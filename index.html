@@ -14,6 +14,8 @@
   <!-- We need to bring in the bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
+  <link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
 
 <body>
@@ -83,8 +85,9 @@
 
 		<div class="row">
 			<button type="button" class="btn btn-primary calculate">Calculate</button>
-			<button type="button" class="btn btn-success clear">Clear</button>
+			<button type="button" class="btn btn-danger clear">Clear</button>
 		</div>
+		<br>
 
 		<div class="row">
 			<div class="jumbotron">
@@ -124,7 +127,7 @@
 			var result = 0;
 			var result2 = 0;
 			var result3 = 0;
-			var isCalculated = false;
+			// var isCalculated = false;
 			var selectedText = "";
 
 			// Use a function to initialize our calculator.
@@ -133,7 +136,7 @@
 				firstPower = 0;
 				secondHours = 0;
 				thirdKwhrCost = 0;
-				isCalculated = false;
+				// isCalculated = false;
 
 				$("#first-number, #second-number, #third-number, #result, #result2, #result3").empty();
 				$("#first-number, #second-number, #third-number").val("0");
@@ -175,9 +178,9 @@
 				result2 = result * 365.25 / 12;
 				result3 = result * 365.25;
 				
-				$("#result").text(result);
-				$("#result2").text(result2);
-				$("#result3").text(result3);
+				$("#result").text(`$ ${result}`);
+				$("#result2").text(`$ ${result2}`);
+				$("#result3").text(`$ ${result3}`);
 
 			});
 
