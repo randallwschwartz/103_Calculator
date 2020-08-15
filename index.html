@@ -58,8 +58,8 @@
 						<input type="text" class="form-control" id="first-number" aria-label="Text input with dropdown button">
 						<div class="input-group-append">
 							<select class="custom-select" id="inputGroupSelect01">
-								<option selected value="1">watts (W)</option>
-								<option value="2">kilowatts (kW)</option>
+								<option value="1">watts (W)</option>
+								<option selected value="2">kilowatts (kW)</option>
 							</select>
 						</div>
 					</div>
@@ -125,6 +125,7 @@
 			var result2 = 0;
 			var result3 = 0;
 			var isCalculated = false;
+			var selectedText = "";
 
 			// Use a function to initialize our calculator.
 			// This way when the user hits clear, we can guarantee a reset of the app.
@@ -141,19 +142,35 @@
 
 			$(".calculate").on("click", function() {
 
-				// If we already clicked equal, don't do the calculation again
-				if (isCalculated) {
-					return false;
-				}
+				// // If we already clicked, don't do the calculation again
+				// if (isCalculated) {
+				// 	return false;
+				// }
 
-				// Set isCalculated to true so that we don't get in a weird UI state by clicking buttons again
-				isCalculated = true;
+				// // Set isCalculated to true so that we don't get in a weird UI state by clicking buttons again
+				// isCalculated = true;
 
 				firstPower = $("#first-number").val();
 				secondHours = $("#second-number").val();
 				thirdKwhrCost = $("#third-number").val();
 
 				// Run the calculation and set the HTML of the result of that operation
+				//
+				//	Energy(kWh/day) = P(kW) * t(h/day) 
+				//  or Energy(kWh/day) = P(W) * t(h/day) / 1000(W/kW)
+				//	Cost($/day) = Energy(kWh/day) * Cost(cents/kWh) / 100(cents/$)
+				//
+
+				$(".custom-select").change(function() {
+					selectedText = $(this).find("option:selected").text();
+				});
+
+				console.log(selectedText);
+
+				if (selectedText === "watts (W)") {
+					firstPower = firstPower / 1000;
+				};
+
 				result = (firstPower * secondHours) * thirdKwhrCost / 100;
 				result2 = result * 365.25 / 12;
 				result3 = result * 365.25;
