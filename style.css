@@ -7,6 +7,12 @@ body {
 	/* background-color: #ccc; */
   }
 
+.row {
+	margin-left: 0 px;
+	margin-right: 0 px;
+}
+
+
 .jumbotron {
 	padding: 30px;
 }
