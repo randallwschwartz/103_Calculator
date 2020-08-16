@@ -15,6 +15,9 @@ body {
 
 .jumbotron {
 	padding: 30px;
+	border:2px solid #003366;
+	width: 400px;
+	/* margin: 0 auto */
 }
 
 .btn {
