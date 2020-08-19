@@ -72,8 +72,9 @@
 				</div>
 				<br>
 
-				<div class="row"> Cost of 1 kilowatt-hour (cents):
-					<div class="input-group">
+				<div class="row"> Cost of 1 kilowatt-hour (dollars):
+					<div class="input-group align-items-center">
+						<span class="input-group-addon">$</span>
 						<input type="text" class="form-control" id="third-number" aria-label="Text input">
 					</div>
 				</div>
@@ -202,13 +203,13 @@
 					firstPower = firstPower / 1000;
 				};
 
-				result = (firstPower * secondHours) * thirdKwhrCost / 100;
+				result = (firstPower * secondHours) * thirdKwhrCost;
 				result2 = result * 365.25 / 12;
 				result3 = result * 365.25;
 				
-				$("#result").text(`$ ${result}`);
-				$("#result2").text(`$ ${result2}`);
-				$("#result3").text(`$ ${result3}`);
+				$("#result").text(`$ ${result.toFixed(2)}`);
+				$("#result2").text(`$ ${result2.toFixed(2)}`);
+				$("#result3").text(`$ ${result3.toFixed(2)}`);
 
 			});
 
